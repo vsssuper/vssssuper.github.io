@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>顾客资料</ion-title>
+    <ion-icon  
+        [routerLink]="'/login'" size="large" slot="end"
+        *ngIf="!this.isLoggedIn"
+        name="person-circle-outline">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (submit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">名字</ion-label>
+      <ion-input [(ngModel)]="customer.name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>照片</ion-label>
+      <input type="file" (change)="chooseFile('photo', $event)" name="photo" accept="image/*" />
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>视频</ion-label>
+      <input type="file" (change)="chooseFile('video', $event)" name="video" accept="video/*" />
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>PDF</ion-label>
+      <input type="file" (change)="chooseFile('pdf', $event)" name="pdf" accept="application/pdf" />
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>文件</ion-label>
+      <input type="file" (change)="chooseFile('word', $event)" name="word" accept=".docx,.doc" />
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!customer.name">提交</ion-button>
+  </form>
+
+  <table *ngIf="customersData.length > 0; else noData">
+    <tr>
+      <th *ngIf="this.isAdmin">员工</th>
+      <th>名字</th>
+      <th>照片</th>
+      <th>视频</th>
+      <th>PDF</th>
+      <th>Word</th>
+      <th class="button"> </th>
+    </tr>
+    <!-- for testing purpose -->
+    <tr *ngFor="let customer of customersData">
+      <td *ngIf="this.isAdmin">{{ customer.access }}</td>
+      <td>{{ customer.name }}</td>
+      <td><img [src]="'assets/' + customer.photo" alt="{{ customer.name }}'s photo" class="customer-photo"/></td>
+      <td><video [src]="'assets/' + customer.video" controls width="100%"></video></td>
+      <td><a [href]="'assets/' + customer.pdf" target="_blank">Open PDF</a></td>
+      <td><a [href]="'assets/' + customer.word" target="_blank">Open Word Document</a></td>
+      <td class="button">
+        <ion-button color="danger" (click)="confirmDelete(customer.id)">
+          删除
+        </ion-button>
+      </td>
+    </tr>
+    <!-- <tr *ngFor="let customer of customersData">
+      <td *ngIf="this.isAdmin">{{ in.access }}</td>
+      <td>{{ customer.name }}</td>
+      <td><img [src]="'assets/' + customer.photo" alt="{{ customer.name }}'s photo" class="customer-photo"/></td>
+      <td><video [src]="customer.video" controls width="100%"></video></td>
+      <td><a [href]="customer.pdf" target="_blank">Open PDF</a></td>
+      <td><a [href]="customer.word" target="_blank">Open Word Document</a></td>
+      <td class="button">
+        <ion-button color="danger" (click)="confirmDelete(customer.id)">
+          删除
+        </ion-button>
+      </td>
+    </tr> -->
+  </table>
+
+  <ng-template #noData>
+    <p>没有顾客资料</p>
+  </ng-template>
+</ion-content>
