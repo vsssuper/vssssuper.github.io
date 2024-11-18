@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>出账</ion-title>
+    <ion-icon  
+        [routerLink]="'/login'" size="large" slot="end"
+        *ngIf="!this.isLoggedIn"
+        name="person-circle-outline">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button (click)="importExcel()" expand="full" color="secondary" *ngIf="this.isAdmin">
+    导入Excel
+  </ion-button>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th *ngIf="this.isAdmin">员工</th>
+          <th>编号</th>
+          <th>新/旧</th>
+          <th>出账日期</th>
+          <th>顾客名字</th>
+          <th>顾客花名</th>
+          <th>IC号码</th>
+          <th>电话号码</th>
+          <th>收入</th>
+          <th>职业</th>
+          <th>出账人</th>
+          <th>除</th>
+          <th>顾客来源</th>
+          <th>顾客户口</th>
+          <th>借</th>
+          <th>拿</th>
+          <th>利息</th>
+          <th>手续费</th>
+          <th>开户口</th>
+          <th>抵押</th>
+          <th>还</th>
+          <th>到期</th>
+          <th>时间</th>
+          <th>天数</th>
+          <th>收账户口</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let out of outs">
+          <td *ngIf="this.isAdmin">{{ out.access }}</td>
+          <td>{{ out.id }}</td>
+          <td>{{ out.new }}</td>
+          <td>{{ out.outDate }}</td>
+          <td>{{ out.name }}</td>
+          <td>{{ out.nickName }}</td>
+          <td>{{ out.ic }}</td>
+          <td>{{ out.phone }}</td>
+          <td>{{ out.income }}</td>
+          <td>{{ out.occupation }}</td>
+          <td>{{ out.pic }}</td>
+          <td>{{ out.divide }}</td>
+          <td>{{ out.source }}</td>
+          <td>{{ out.account }}</td>
+          <td>{{ out.owe }}</td>
+          <td>{{ out.take }}</td>
+          <td>{{ out.ins }}</td>
+          <td>{{ out.fees }}</td>
+          <td>{{ out.open }}</td>
+          <td>{{ out.deposit }}</td>
+          <td>{{ out.pay }}</td>
+          <td>{{ out.dueDate }}</td>
+          <td>{{ out.dueTime }}</td>
+          <td>{{ out.duration }}</td>
+          <td>{{ out.keep }}</td>
+          <td>{{ out.note }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
