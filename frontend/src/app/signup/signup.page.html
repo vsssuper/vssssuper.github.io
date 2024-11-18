@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>帐户</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSignup()">
+    <h2>注册帐户:</h2>
+    <ion-item>
+      <ion-label position="floating">用户名</ion-label>
+      <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">密码</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">注册</ion-button>
+  </form>
+
+  <div>
+    <h2>用户数据:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>散列密码</th>
+          <th class="button"> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.password }}</td>
+          <td class="button">
+            <ion-button color="danger" (click)="confirmDelete(user.id)">
+              删除
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
