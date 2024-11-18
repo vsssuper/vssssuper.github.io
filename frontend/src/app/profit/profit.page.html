@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>收账</ion-title>
+    <ion-icon  
+        [routerLink]="'/login'" size="large" slot="end"
+        *ngIf="!this.isLoggedIn"
+        name="person-circle-outline">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button (click)="importExcel()" expand="full" color="secondary" *ngIf="this.isAdmin">
+    导入Excel
+  </ion-button>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th *ngIf="this.isAdmin">员工</th>
+          <th>编号</th>
+          <th>收账日期</th>
+          <th>顾客名字</th>
+          <th>收利息</th>
+          <th>Payment</th>
+          <th>补</th>
+          <th>来钱</th>
+          <th>配合收</th>
+          <th>砍账</th>
+          <th>清账</th>
+          <th>总数</th>
+          <th>收账户口</th>
+          <th>下一期</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let in of ins">
+          <td *ngIf="this.isAdmin">{{ in.access }}</td>
+          <td>{{ in.id }}</td>
+          <td>{{ in.inDate }}</td>
+          <td>{{ in.name }}</td>
+          <td>{{ in.ins }}</td>
+          <td>{{ in.payment }}</td>
+          <td>{{ in.fees }}</td>
+          <td>{{ in.income }}</td>
+          <td>{{ in.receive }}</td>
+          <td>{{ in.kanzhang }}</td>
+          <td>{{ in.clear }}</td>
+          <td>{{ in.total }}</td>
+          <td>{{ in.account }}</td>
+          <td>{{ in.next }}</td>
+          <td>{{ in.note }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>
